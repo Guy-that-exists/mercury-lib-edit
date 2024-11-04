@@ -118,7 +118,7 @@ end
 function Library:change_theme(toTheme)
 	Library.CurrentTheme = toTheme
 	local c = self:lighten(toTheme.Tertiary, 20)
-	Library.DisplayName.Text = "Welcome, <font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'> <b>" .. LocalPlayer.DisplayName .. "</b> </font>"
+	Library.DisplayName.Text = "Slap battles hub that exists"
 	for color, objects in next, Library.ThemeObjects do
 		local themeColor = Library.CurrentTheme[color]
 		for _, obj in next, objects do
@@ -777,7 +777,7 @@ function Library:create(options)
 
 		local displayName = profile:object("TextLabel", {
 			RichText = true,
-			Text = "Welcome, <font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'> <b>" .. LocalPlayer.DisplayName .. "</b> </font>",
+			Text = "Slap battles hub that exists",
 			TextScaled = true,
 			Position = UDim2.new(0, 105,0, 10),
 			Theme = {TextColor3 = {"Tertiary", 10}},
@@ -789,24 +789,13 @@ function Library:create(options)
 	end
 
 	local profileName = profile:object("TextLabel", {
-		Text = "@" .. LocalPlayer.Name,
+		Text = "Welcome," .. LocalPlayer.DisplayName,
 		TextScaled = true,
 		Position = UDim2.new(0, 105,0, 47),
 		Theme = {TextColor3 = "Tertiary"},
 		Size = UDim2.new(0, 400,0, 20),
 		BackgroundTransparency = 1,
 		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	local timeDisplay = profile:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 105, 1, -10),
-		Size = UDim2.new(0, 400,0, 20),
-		AnchorPoint = Vector2.new(0, 1),
-		Theme = {TextColor3 = {"WeakText", -20}},
-		TextScaled = true,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		Text = tostring(os.date("%X")):sub(1, os.date("%X"):len()-3)
 	})
 
 	do
