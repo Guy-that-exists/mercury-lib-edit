@@ -118,7 +118,7 @@ end
 function Library:change_theme(toTheme)
 	Library.CurrentTheme = toTheme
 	local c = self:lighten(toTheme.Tertiary, 20)
-	Library.DisplayName.Text = "Slap battles hub that exists"
+	Library.DisplayName.Text = options.Title
 	for color, objects in next, Library.ThemeObjects do
 		local themeColor = Library.CurrentTheme[color]
 		for _, obj in next, objects do
@@ -432,6 +432,7 @@ function Library:create(options)
 	end
 
 	options = self:set_defaults({
+		Title = "Mercury",
 		Name = "Mercury",
 		Size = UDim2.fromOffset(600, 400),
 		Theme = self.Themes[settings.Theme],
@@ -777,7 +778,7 @@ function Library:create(options)
 
 		local displayName = profile:object("TextLabel", {
 			RichText = true,
-			Text = "Slap battles hub that exists",
+			Text = options.Title,
 			TextScaled = true,
 			Position = UDim2.new(0, 105,0, 10),
 			Theme = {TextColor3 = {"Tertiary", 10}},
@@ -796,6 +797,17 @@ function Library:create(options)
 		Size = UDim2.new(0, 400,0, 20),
 		BackgroundTransparency = 1,
 		TextXAlignment = Enum.TextXAlignment.Left
+	})
+
+	local timeDisplay = profile:object("TextLabel", {
+		BackgroundTransparency = 1,
+		Position = UDim2.new(0, 105, 1, -10),
+		Size = UDim2.new(0, 400,0, 20),
+		AnchorPoint = Vector2.new(0, 1),
+		Theme = {TextColor3 = {"WeakText", -20}},
+		TextScaled = true,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		Text = tostring(os.date("%X")):sub(1, os.date("%X"):len()-3)
 	})
 
 	do
