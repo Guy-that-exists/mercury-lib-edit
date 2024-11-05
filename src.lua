@@ -799,6 +799,10 @@ function Library:create(options)
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
 
+if pcall(function()
+	identifyexecutor()
+end)
+then
 	local timeDisplay = profile:object("TextLabel", {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 105, 1, -10),
@@ -807,15 +811,20 @@ function Library:create(options)
 		Theme = {TextColor3 = {"WeakText", -20}},
 		TextScaled = true,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		if pcall(function()
-			identifyexecutor()
-		end)
-		then
 		Text = identifyexecutor()
-		else
-		Text = "Unknown executor"
-		end
 	})
+else
+	local timeDisplay = profile:object("TextLabel", {
+		BackgroundTransparency = 1,
+		Position = UDim2.new(0, 105, 1, -10),
+		Size = UDim2.new(0, 400,0, 20),
+		AnchorPoint = Vector2.new(0, 1),
+		Theme = {TextColor3 = {"WeakText", -20}},
+		TextScaled = true,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		Text = "Unknown executor"
+	})
+end
 
 	local settingsTabIcon = profile:object("ImageButton", {
 		BackgroundTransparency = 1,
