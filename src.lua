@@ -811,7 +811,7 @@ then
 		Theme = {TextColor3 = {"WeakText", -20}},
 		TextScaled = true,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Text = identifyexecutor()
+		Text = table.concat({identifyexecutor()}, " ")
 	})
 else
 	local timeDisplay = profile:object("TextLabel", {
