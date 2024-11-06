@@ -3276,7 +3276,6 @@ function Library:slider(options)
 		Default = 50,
 		Min = 0,
 		Max = 100,
-		Increment = 1,
 		Callback = function() end
 	}, options)
 
@@ -3392,7 +3391,6 @@ function Library:slider(options)
 	local methods = {}
 
 	function methods:Set(value)
-		value = math.clamp(Round(value, options.Increment), options.Min, options.Max)
 		sliderLine:tween{Size = UDim2.fromScale(((value - options.Min) / (options.Max - options.Min)), 1)}
 	end
 
