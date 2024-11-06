@@ -115,26 +115,6 @@ function Library:set_defaults(defaults, options)
 	return defaults
 end
 
-function Library:change_theme(toTheme)
-	Library.CurrentTheme = toTheme
-	local c = self:lighten(toTheme.Tertiary, 20)
-	Library.DisplayName.Text = "<font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'>" .. "<b>" .. "test" .. "</b>" .. "</font>"
-	for color, objects in next, Library.ThemeObjects do
-		local themeColor = Library.CurrentTheme[color]
-		for _, obj in next, objects do
-			local element, property, theme, colorAlter = obj[1], obj[2], obj[3], obj[4] or 0
-			local themeColor = Library.CurrentTheme[theme]
-			local modifiedColor = themeColor
-			if colorAlter < 0 then
-				modifiedColor = Library:darken(themeColor, -1 * colorAlter)
-			elseif colorAlter > 0 then
-				modifiedColor = Library:lighten(themeColor, colorAlter)
-			end
-			element:tween{[property] = modifiedColor}
-		end
-	end
-end
-
 function Library:object(class, properties)
 	local localObject = Instance.new(class)
 
@@ -542,6 +522,26 @@ function Library:create(options)
 		end
 	end
 
+	function Library:change_theme(toTheme)
+	Library.CurrentTheme = toTheme
+	local c = self:lighten(toTheme.Tertiary, 20)
+	Library.DisplayName.Text = "<font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'>" .. "<b>" .. options.Title .. "</b>" .. "</font>"
+	for color, objects in next, Library.ThemeObjects do
+		local themeColor = Library.CurrentTheme[color]
+		for _, obj in next, objects do
+			local element, property, theme, colorAlter = obj[1], obj[2], obj[3], obj[4] or 0
+			local themeColor = Library.CurrentTheme[theme]
+			local modifiedColor = themeColor
+			if colorAlter < 0 then
+				modifiedColor = Library:darken(themeColor, -1 * colorAlter)
+			elseif colorAlter > 0 then
+				modifiedColor = Library:lighten(themeColor, colorAlter)
+			end
+			element:tween{[property] = modifiedColor}
+		end
+	end
+end
+
 	rawset(core, "oldSize", options.Size)
 
 	self.mainFrame = core
@@ -778,7 +778,7 @@ function Library:create(options)
 
 		local displayName = profile:object("TextLabel", {
 			RichText = true,
-			Text = "<font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'>" .. "<b>" .. "test" .. "</b>" .. "</font>",
+			Text = "<font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'>" .. "<b>" .. options.Title .. "</b>" .. "</font>",
 			TextScaled = true,
 			Position = UDim2.new(0, 105,0, 10),
 			Theme = {TextColor3 = {"Tertiary", 10}},
