@@ -3372,7 +3372,7 @@ function Library:slider(options)
 			down = true
 			local tween = valueText:tween{Size = UDim2.fromOffset(valueText.TextBounds.X + 20, 20)}
 			while RunService.RenderStepped:wait() and down do
-				local percentage = math.clamp((Mouse.X - sliderBar.AbsolutePosition.X) / (sliderBar.AbsoluteSize.X), 0, 20)
+				local percentage = math.clamp((Mouse.X - sliderBar.AbsolutePosition.X) / (sliderBar.AbsoluteSize.X), 0, 1)
 				local value = ((options.Max - options.Min) * percentage) + options.Min
 				value = math.floor(value)
 				valueText.Text = value
@@ -3392,7 +3392,7 @@ function Library:slider(options)
 	local methods = {}
 
 	function methods:Set(value)
-		sliderLine:tween{Size = UDim2.fromScale(((value - options.Min) / (options.Max - options.Min)), 1)}
+		sliderLine:tween{Size = UDim2.fromScale(((value - options.Min) / (options.Max - options.Min)), 20)}
 	end
 
 	return methods
