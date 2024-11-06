@@ -3381,7 +3381,7 @@ function Library:slider(options)
 				end
 				sliderLine:tween{
 					Length = 0.06,
-					Size = UDim2.fromScale(percentage, 1)
+					Size = UDim2.fromScale(percentage, 20)
 				}
 				options.Callback(value)
 			end
@@ -3392,7 +3392,7 @@ function Library:slider(options)
 	local methods = {}
 
 	function methods:Set(value)
-		sliderLine:tween{Size = UDim2.fromScale(((value - options.Min) / (options.Max - options.Min)), 20)}
+		sliderLine:tween{Size = UDim2.fromScale(((value - options.Min) / (options.Max - options.Min)), 1)}
 	end
 
 	return methods
