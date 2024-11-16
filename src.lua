@@ -799,10 +799,7 @@ end
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
 
-if pcall(function()
-	identifyexecutor()
-end)
-then
+if identifyexecutor then
 	local timeDisplay = profile:object("TextLabel", {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 105, 1, -10),
