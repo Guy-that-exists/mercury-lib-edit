@@ -765,12 +765,12 @@ end
 	}):round(7)
 
 	local profilePictureContainer = profile:object("ImageLabel", {
-		Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100),
+		Image = "rbxassetid://" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId,
 		Theme = {BackgroundColor3 = {"Secondary", 10}},
 		AnchorPoint = Vector2.new(0, 0.5),
 		Position = UDim2.new(0, 10, 0.5),
 		Size = UDim2.fromOffset(80, 80)
-	}):round(100)
+	}):round(7)
 
 	local displayName; do
 		local h, s, v = Color3.toHSV(options.Theme.Tertiary)
