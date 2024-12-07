@@ -789,39 +789,51 @@ end
 		Library.DisplayName = displayName
 	end
 
-	local profileName = profile:object("TextLabel", {
-		Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
-		TextScaled = true,
-		Position = UDim2.new(0, 105,0, 47),
-		Theme = {TextColor3 = "Tertiary"},
-		Size = UDim2.new(0, 400,0, 20),
-		BackgroundTransparency = 1,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
+	if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId ~= 0 then
+		local profileName = profile:object("TextLabel", {
+			Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId,
+			TextScaled = true,
+			Position = UDim2.new(0, 105,0, 47),
+			Theme = {TextColor3 = "Tertiary"},
+			Size = UDim2.new(0, 400,0, 20),
+			BackgroundTransparency = 1,
+			TextXAlignment = Enum.TextXAlignment.Left
+		})
+	else
+		local profileName = profile:object("TextLabel", {
+			Text = game:GetService("MarketplaceService"):GetProductInfo(game:GetService("AssetService"):GetGamePlacesAsync():GetCurrentPage()[1].PlaceId).IconImageAssetId,
+			TextScaled = true,
+			Position = UDim2.new(0, 105,0, 47),
+			Theme = {TextColor3 = "Tertiary"},
+			Size = UDim2.new(0, 400,0, 20),
+			BackgroundTransparency = 1,
+			TextXAlignment = Enum.TextXAlignment.Left
+		})
+	end
 
-if identifyexecutor then
-	local timeDisplay = profile:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 105, 1, -10),
-		Size = UDim2.new(0, 400,0, 20),
-		AnchorPoint = Vector2.new(0, 1),
-		Theme = {TextColor3 = {"WeakText", -20}},
-		TextScaled = true,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		Text = table.concat({identifyexecutor()}, " ")
-	})
-else
-	local timeDisplay = profile:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 105, 1, -10),
-		Size = UDim2.new(0, 400,0, 20),
-		AnchorPoint = Vector2.new(0, 1),
-		Theme = {TextColor3 = {"WeakText", -20}},
-		TextScaled = true,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		Text = "Unknown executor"
-	})
-end
+	if identifyexecutor then
+		local timeDisplay = profile:object("TextLabel", {
+			BackgroundTransparency = 1,
+			Position = UDim2.new(0, 105, 1, -10),
+			Size = UDim2.new(0, 400,0, 20),
+			AnchorPoint = Vector2.new(0, 1),
+			Theme = {TextColor3 = {"WeakText", -20}},
+			TextScaled = true,
+			TextXAlignment = Enum.TextXAlignment.Left,
+			Text = table.concat({identifyexecutor()}, " ")
+		})
+	else
+		local timeDisplay = profile:object("TextLabel", {
+			BackgroundTransparency = 1,
+			Position = UDim2.new(0, 105, 1, -10),
+			Size = UDim2.new(0, 400,0, 20),
+			AnchorPoint = Vector2.new(0, 1),
+			Theme = {TextColor3 = {"WeakText", -20}},
+			TextScaled = true,
+			TextXAlignment = Enum.TextXAlignment.Left,
+			Text = "Unknown executor"
+		})
+	end
 
 	local settingsTabIcon = profile:object("ImageButton", {
 		BackgroundTransparency = 1,
