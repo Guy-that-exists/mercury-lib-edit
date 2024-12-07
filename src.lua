@@ -764,13 +764,23 @@ end
 		Size = UDim2.new(1, -20, 0, 100)
 	}):round(7)
 
-	local profilePictureContainer = profile:object("ImageLabel", {
-		Image = "rbxassetid://" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId,
-		Theme = {BackgroundColor3 = {"Secondary", 10}},
-		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.new(0, 10, 0.5),
-		Size = UDim2.fromOffset(80, 80)
-	}):round(7)
+	if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId ~= 0 then
+		local profilePictureContainer = profile:object("ImageLabel", {
+			Image = "rbxassetid://" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId,
+			Theme = {BackgroundColor3 = {"Secondary", 10}},
+			AnchorPoint = Vector2.new(0, 0.5),
+			Position = UDim2.new(0, 10, 0.5),
+			Size = UDim2.fromOffset(80, 80)
+		}):round(7)
+	else
+		local profilePictureContainer = profile:object("ImageLabel", {
+			Image = "rbxassetid://" .. game:GetService("MarketplaceService"):GetProductInfo(game:GetService("AssetService"):GetGamePlacesAsync():GetCurrentPage()[1].PlaceId).IconImageAssetId,
+			Theme = {BackgroundColor3 = {"Secondary", 10}},
+			AnchorPoint = Vector2.new(0, 0.5),
+			Position = UDim2.new(0, 10, 0.5),
+			Size = UDim2.fromOffset(80, 80)
+		}):round(7)
+	end
 
 	local displayName; do
 		local h, s, v = Color3.toHSV(options.Theme.Tertiary)
@@ -789,27 +799,15 @@ end
 		Library.DisplayName = displayName
 	end
 
-	if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId ~= 0 then
-		local profileName = profile:object("TextLabel", {
-			Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).IconImageAssetId,
-			TextScaled = true,
-			Position = UDim2.new(0, 105,0, 47),
-			Theme = {TextColor3 = "Tertiary"},
-			Size = UDim2.new(0, 400,0, 20),
-			BackgroundTransparency = 1,
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	else
-		local profileName = profile:object("TextLabel", {
-			Text = game:GetService("MarketplaceService"):GetProductInfo(game:GetService("AssetService"):GetGamePlacesAsync():GetCurrentPage()[1].PlaceId).IconImageAssetId,
-			TextScaled = true,
-			Position = UDim2.new(0, 105,0, 47),
-			Theme = {TextColor3 = "Tertiary"},
-			Size = UDim2.new(0, 400,0, 20),
-			BackgroundTransparency = 1,
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
+	local profileName = profile:object("TextLabel", {
+		Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+		TextScaled = true,
+		Position = UDim2.new(0, 105,0, 47),
+		Theme = {TextColor3 = "Tertiary"},
+		Size = UDim2.new(0, 400,0, 20),
+		BackgroundTransparency = 1,
+		TextXAlignment = Enum.TextXAlignment.Left
+	})
 
 	if identifyexecutor then
 		local timeDisplay = profile:object("TextLabel", {
